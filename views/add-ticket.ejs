@@ -1,0 +1,32 @@
+<% include partials/header.ejs %>
+    <div class="container">
+        <% if (message != '') { %>
+            <p class="text-center text-danger"><%= message %></p>
+        <% } %>
+        <form class="add-ticket-form" action="" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <input type="text" class="form-control" name="user_id" id="user_id" placeholder="Username" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <input type="date" class="form-control" name="date_created" id="date" placeholder="Date" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" name="comments" id="comments" placeholder="Comments" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <select id="status" name="status" class="form-control" required>
+                        <option selected disabled>Choose Status</option>
+                        <option>Open</option>
+                        <option>Closed</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary float-right">Add Ticket</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
