@@ -14,7 +14,7 @@ module.exports = {
 
         let message = '';
         let ticket_id = req.body.ticket_id;
-        let query = req.body.query;
+        let query = req.body.tickets;
 
         let ticket_idQuery = "SELECT * FROM `tickets` WHERE ticket_id = '" + ticket_id + "'";
 
