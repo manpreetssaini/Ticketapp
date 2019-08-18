@@ -9,7 +9,7 @@ module.exports = {
     },
     createTicket: (req, res) => {
         if(!req.files) {
-            return res.status(400).send("No files were uploaded.");
+            return res.status(400).send("Ticket not created.");
         }
 
         let message = '';
