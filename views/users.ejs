@@ -1,0 +1,35 @@
+<% include partials/header.ejs %>
+    <div class="table-wrapper">
+        <% if (users.length > 0) { %>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Staff</th>
+                        <th scope="col">User ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Telephone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach((user, index) => { %>
+                        <tr>
+                            <td><%= user.user_id %></td>
+                            <td><%= user.name %></td>
+                            <td><%= user.address %></td>
+                            <td><%= user.telephone %></td>
+                            <td>
+                                <a href="/edit/<%= user.id %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/delete/<%= user.id %>" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="text-center">No users found. Go <a href="/user" >here</a> to add user.</p>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>

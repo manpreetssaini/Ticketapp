@@ -8,17 +8,15 @@ module.exports = {
         });
     },
     createTicket: (req, res) => {
-        if(!req.files) {
+        let user_id = req.params.id
+        console.log(user_id);
+                if(!req.files) {
             return res.status(400).send("Ticket not created.");
         }
+    
+        let createTicketQuery = "SELECT * FROM `tickets` WHERE user_id = '" + user_id + "'";
 
-        let message = '';
-        let ticket_id = req.body.ticket_id;
-        let query = req.body.tickets;
-
-        let ticket_idQuery = "SELECT * FROM `tickets` WHERE ticket_id = '" + ticket_id + "'";
-
-        db.query(ticket_idQuery, (err, result) => {
+        db.query(createTicketQuery, (err, result) => {
             if(err) {
                 return res.status(500).send(err);
             }
@@ -32,7 +30,7 @@ module.exports = {
                 // check file type before uploading it
                 return res.status(500).send(err);
             }
-            let query = "INSERT INTO `tickets` (user_id, date_created, comments, status) VALUES ('" + user_id + "', '" + date_created +"', '" + comments + "', '" + status + '")"';
+            let query = "INSERT INTO `tickets` (user_id, date_created, comments, status) VALUES (NULL,'" + user_id + "', '" + date_created +"', '" + comments + "', '" + status + '")"';
             db.query(query, (err, result) => {
                 if (err) {
                     return res.status(500).send(err);
@@ -42,8 +40,8 @@ module.exports = {
          });
     },
     editTicketPage: (req,res) => {
-        let ticket_id = req.params.id;
-        let query = "SELECT * FROM `tickets` WHERE id = '" + ticket_id + "' ";
+        let user_id = req.params.id;
+        let query = "SELECT * FROM `tickets` WHERE id = '" + user_id + "' ";
         db.query(query, (err, result) => {
             if(err) {
                 return res.status(500).send(err);
@@ -60,7 +58,7 @@ module.exports = {
         let user_id = req.params.id;
         let date_created = req.body.date_created;
         let comments = req.body.comments;
-        let status = req.body.response;
+        let status = req.body.status;
 
         let query = " UPDATE `tickets` SET `user_id` = '" + user_id + "', `date_create` = '" + date_created + "', `comments` = '" + comments + "', `status` = '" + status + "'";
           db.query(query, (err, result) => {
